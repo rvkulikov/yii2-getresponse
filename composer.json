@@ -1,0 +1,25 @@
+{
+  "name": "rvkulikov/yii2-getresponse",
+  "description": "GetResponse client",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Kulikov Roman",
+      "email": "r.v.kulikov@yandex.ru"
+    }
+  ],
+  "require": {
+    "php": ">=5.4.0",
+    "yiisoft/yii2": "~2.0.0",
+    "yiisoft/yii2-httpclient": "~2.0.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "4.8.x-dev"
+  },
+  "autoload": {
+    "psr-4": {
+      "rvkulikov\\yii2\\getResponse\\": ""
+    }
+  }
+}
