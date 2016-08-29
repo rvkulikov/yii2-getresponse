@@ -13,7 +13,7 @@ use yii\httpclient\Response;
  *
  * @author  Roman Kulikov <r.v.kulikov@yandex.ru>
  */
-class BaseGRApiModule extends Component
+class GRApiBase extends Component
 {
     /**
      * @var Client

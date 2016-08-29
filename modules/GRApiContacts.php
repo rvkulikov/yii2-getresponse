@@ -1,8 +1,7 @@
 <?php
 namespace rvkulikov\yii2\getResponse\modules;
 
-use rvkulikov\yii2\getResponse\models\contact\Contact;
-use rvkulikov\yii2\getResponse\modules\contacts\GetContactsOptions;
+use rvkulikov\yii2\getResponse\modules\contacts\GRGetContactsOptions;
 use yii\httpclient\Client;
 
 /**
@@ -12,7 +11,7 @@ use yii\httpclient\Client;
  *
  * @author  Roman Kulikov <r.v.kulikov@yandex.ru>
  */
-class Contacts extends BaseGRApiModule
+class GRApiContacts extends GRApiBase
 {
     /**
      * @var Client
@@ -20,11 +19,11 @@ class Contacts extends BaseGRApiModule
     public $httpClient;
 
     /**
-     * @param GetContactsOptions $options
+     * @param GRGetContactsOptions $options
      *
-     * @return Contact[]
+     * @return mixed[]
      */
-    public function getContacts(GetContactsOptions $options)
+    public function getContacts(GRGetContactsOptions $options)
     {
         $request  = $this->httpClient->get('contacts', $options->toArray());
         $response = $request->send();
@@ -33,20 +32,24 @@ class Contacts extends BaseGRApiModule
             $this->handleError($response);
         }
 
-        $models = [];
-        foreach ($response->getData() as $item) {
-            $contact = new Contact();
-            $contact->load([$contact->formName() => $item]);
-
-            $models[] = $contact;
-        }
-
-        return $models;
+        return $response->getData();
     }
 
+    /**
+     * @param string $id
+     *
+     * @return mixed
+     */
     public function getContact($id)
     {
+        $request  = $this->httpClient->get("contacts/{$id}");
+        $response = $request->send();
 
+        if (!$response->isOk) {
+            $this->handleError($response);
+        }
+
+        return $response->getData();
     }
 
     public function getContactActivities($id)
