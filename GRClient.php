@@ -1,7 +1,9 @@
 <?php
 namespace rvkulikov\yii2\getResponse;
 
+use rvkulikov\yii2\getResponse\modules\GRApiCampaigns;
 use rvkulikov\yii2\getResponse\modules\GRApiContacts;
+use rvkulikov\yii2\getResponse\modules\GRApiCustomFields;
 use yii\base\Component;
 use yii\base\InvalidConfigException;
 use yii\httpclient\Client;
@@ -28,6 +30,16 @@ class GRClient extends Component
      * @var GRApiContacts
      */
     private $contacts;
+
+    /**
+     * @var GRApiCampaigns
+     */
+    private $campaigns;
+
+    /**
+     * @var GRApiCustomFields
+     */
+    private $customFields;
 
     /**
      * @inheritdoc
@@ -78,5 +90,33 @@ class GRClient extends Component
         }
 
         return $this->contacts;
+    }
+
+    /**
+     * @return GRApiCampaigns
+     */
+    public function getCampaigns()
+    {
+        if (!$this->campaigns) {
+            $this->campaigns = new GRApiCampaigns([
+                'httpClient' => $this->getHttpClient()
+            ]);
+        }
+
+        return $this->campaigns;
+    }
+
+    /**
+     * @return GRApiCustomFields
+     */
+    public function getCustomFields()
+    {
+        if (!$this->customFields) {
+            $this->customFields = new GRApiCustomFields([
+                'httpClient' => $this->getHttpClient()
+            ]);
+        }
+
+        return $this->customFields;
     }
 }

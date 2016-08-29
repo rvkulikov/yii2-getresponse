@@ -47,6 +47,7 @@ class GRBaseException extends Exception
         1017 => 'rvkulikov\yii2\getResponse\exceptions\GR_1017_APIWasPermanentlyBlocked',
         1018 => 'rvkulikov\yii2\getResponse\exceptions\GR_1018_YourIPWasBlocked',
         1021 => 'rvkulikov\yii2\getResponse\exceptions\GR_1021_ThereIsSomethingWrongWithYourRequestHeaders',
+        1023 => 'rvkulikov\yii2\getResponse\exceptions\GR_1023_AccessForbidden',
     ];
 
     /**

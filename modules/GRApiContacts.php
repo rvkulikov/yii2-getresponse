@@ -1,8 +1,10 @@
 <?php
 namespace rvkulikov\yii2\getResponse\modules;
 
+use rvkulikov\yii2\getResponse\modules\contacts\GRCreateContactOptions;
 use rvkulikov\yii2\getResponse\modules\contacts\GRGetContactsOptions;
-use yii\httpclient\Client;
+use rvkulikov\yii2\getResponse\modules\contacts\GRUpdateContactOptions;
+use yii\helpers\ArrayHelper;
 
 /**
  * Class Contacts
@@ -14,12 +16,7 @@ use yii\httpclient\Client;
 class GRApiContacts extends GRApiBase
 {
     /**
-     * @var Client
-     */
-    public $httpClient;
-
-    /**
-     * @param GRGetContactsOptions $options
+     * @param GRGetContactsOptions|null $options
      *
      * @return mixed[]
      */
@@ -49,7 +46,11 @@ class GRApiContacts extends GRApiBase
             $this->handleError($response);
         }
 
-        return $response->getData();
+        $data = $response->getData();
+
+        $data['customFieldValues'] = ArrayHelper::index($data['customFieldValues'], 'customFieldId');
+
+        return $data;
     }
 
     public function getContactActivities($id)
@@ -57,14 +58,39 @@ class GRApiContacts extends GRApiBase
 
     }
 
-    public function createContact()
+    /**
+     * @param GRCreateContactOptions $options
+     *
+     * @return mixed
+     */
+    public function createContact(GRCreateContactOptions $options)
     {
+        $request  = $this->httpClient->post("contacts", $options->toArray());
+        $response = $request->send();
 
+        if (!$response->isOk) {
+            $this->handleError($response);
+        }
+
+        return $response->getData();
     }
 
-    public function updateContact($id)
+    /**
+     * @param string                 $id
+     * @param GRUpdateContactOptions $options
+     *
+     * @return array|mixed
+     */
+    public function updateContact($id, GRUpdateContactOptions $options)
     {
+        $request  = $this->httpClient->post("contacts/{$id}", $options->toArray());
+        $response = $request->send();
 
+        if (!$response->isOk) {
+            $this->handleError($response);
+        }
+
+        return $response->getData();
     }
 
     public function deleteContact($id)
