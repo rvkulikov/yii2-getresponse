@@ -23,9 +23,9 @@ class GRApiContacts extends GRApiBase
      *
      * @return mixed[]
      */
-    public function getContacts(GRGetContactsOptions $options)
+    public function getContacts(GRGetContactsOptions $options = null)
     {
-        $request  = $this->httpClient->get('contacts', $options->toArray());
+        $request  = $this->httpClient->get('contacts', $options ? $options->toArray() : null);
         $response = $request->send();
 
         if (!$response->isOk) {

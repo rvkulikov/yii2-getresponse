@@ -61,14 +61,12 @@ class GRBaseException extends Exception
 
         $exception = \Yii::createObject([
             'class'           => $class,
-            'code'            => $data['code'],
-            'httpCode'        => $data['httpCode'],
+            'httpCode'        => $response->statusCode,
             'codeDescription' => $data['codeDescription'],
-            'message'         => $data['message'],
             'moreInfo'        => $data['moreInfo'],
             'context'         => $data['context'],
             'uuid'            => $data['uuid'],
-        ]);
+        ], [$data['message'], $data['code'], null]);
 
         /** @noinspection PhpIncompatibleReturnTypeInspection */
         return $exception;
