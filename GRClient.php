@@ -20,6 +20,7 @@ class GRClient extends Component
     public $baseUrl = 'https://api.getresponse.com/v3';
     public $token;
     public $domain;
+    public $fields  = [];
 
     /**
      * @var Client
