@@ -1,19 +1,20 @@
 <?php
-namespace rvkulikov\yii2\getResponse\models\contact;
+namespace rvkulikov\yii2\getResponse\models;
 
 use yii\base\Model;
 
 /**
- * Class Contact
+ * Class GRContactModel
  *
- * @package rvkulikov\yii2\getResponse\models\contact
+ * @package rvkulikov\yii2\getResponse\models
  *
  * @author  Roman Kulikov <r.v.kulikov@yandex.ru>
  */
-class Contact extends Model
+class GRContactModel extends Model
 {
     public $contactId;
     public $href;
+    public $campaign;
     public $name;
     public $email;
     public $note;
@@ -21,12 +22,11 @@ class Contact extends Model
     public $dayOfCycle;
     public $createdOn;
     public $changedOn;
-    public $campaign;
     public $geolocation;
     public $timeZone;
     public $ipAddress;
+    public $scoring;
     public $tags;
     public $customFieldValues;
     public $activities;
-    public $scoring;
 }
