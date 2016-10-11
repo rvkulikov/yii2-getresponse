@@ -12,5 +12,11 @@ use yii\base\Model;
  */
 class GRCustomFieldModel extends Model
 {
-
+    public $customFieldId;
+    public $name;
+    public $fieldType;
+    public $valueType;
+    public $type;
+    public $hidden;
+    public $values;
 }

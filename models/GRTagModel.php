@@ -12,5 +12,7 @@ use yii\base\Model;
  */
 class GRTagModel extends Model
 {
-
+    public $tagId;
+    public $createdAt;
+    public $name;
 }

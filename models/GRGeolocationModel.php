@@ -12,5 +12,12 @@ use yii\base\Model;
  */
 class GRGeolocationModel extends Model
 {
-
+    public $latitude;
+    public $longitude;
+    public $continentCode;
+    public $countryCode;
+    public $region;
+    public $postalCode;
+    public $dmaCode;
+    public $city;
 }

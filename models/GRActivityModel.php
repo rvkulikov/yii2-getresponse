@@ -12,5 +12,8 @@ use yii\base\Model;
  */
 class GRActivityModel extends Model
 {
-
+    public $activity;
+    public $subject;
+    public $createdOn;
+    public $previewUrl;
 }

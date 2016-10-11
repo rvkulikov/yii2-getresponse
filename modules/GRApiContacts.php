@@ -53,9 +53,21 @@ class GRApiContacts extends GRApiBase
         return $data;
     }
 
+    /**
+     * @param string $id
+     *
+     * @return mixed
+     */
     public function getContactActivities($id)
     {
+        $request  = $this->httpClient->get("contacts/{$id}/activities");
+        $response = $request->send();
 
+        if (!$response->isOk) {
+            $this->handleError($response);
+        }
+
+        return $response->getData();
     }
 
     /**
