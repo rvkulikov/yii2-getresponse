@@ -109,4 +109,24 @@ class GRApiContacts extends GRApiBase
     {
 
     }
+
+    public function copyContactToCampaign($contactId, $campaignId)
+    {
+        /**
+         * contact does not exist
+         * campaign does not exist
+         * campaign already contains this contact (merge/replace)
+         * how to resolve merge conflicts
+         */
+    }
+
+    public function moveContactToCampaign($contactId, $campaignId)
+    {
+        /**
+         * contact does not exist
+         * campaign does not exist
+         * campaign already contains this contact (merge/replace/delete)
+         * how to resolve merge conflicts
+         */
+    }
 }
