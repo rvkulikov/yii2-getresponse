@@ -19,7 +19,7 @@ class GRApiSearchContacts extends GRApiBase
      */
     public function getSearchContacts(GRGetSearchContactsOptions $options = null)
     {
-        $request  = $this->httpClient->get('newsletters', $options ? $options->toArray() : null);
+        $request  = $this->httpClient->get('search-contacts', $options ? $options->toArray() : null);
         $response = $request->send();
 
         if (!$response->isOk) {
