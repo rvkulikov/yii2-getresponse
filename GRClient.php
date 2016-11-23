@@ -4,6 +4,7 @@ namespace rvkulikov\yii2\getResponse;
 use rvkulikov\yii2\getResponse\modules\GRApiCampaigns;
 use rvkulikov\yii2\getResponse\modules\GRApiContacts;
 use rvkulikov\yii2\getResponse\modules\GRApiCustomFields;
+use rvkulikov\yii2\getResponse\modules\GRApiNewsLetters;
 use rvkulikov\yii2\getResponse\modules\GRApiTags;
 use yii\base\Component;
 use yii\base\InvalidConfigException;
@@ -47,6 +48,10 @@ class GRClient extends Component
      * @var GRApiTags
      */
     private $tags;
+    /**
+     * @var GRApiNewsLetters
+     */
+    private $newsLetters;
 
     /**
      * @inheritdoc
@@ -139,5 +144,19 @@ class GRClient extends Component
         }
 
         return $this->tags;
+    }
+
+    /**
+     * @return GRApiNewsLetters
+     */
+    public function getNewsLetters()
+    {
+        if (!$this->newsLetters) {
+            $this->newsLetters = new GRApiNewsLetters([
+                'httpClient' => $this->getHttpClient()
+            ]);
+        }
+
+        return $this->newsLetters;
     }
 }
