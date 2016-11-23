@@ -2,6 +2,7 @@
 namespace rvkulikov\yii2\getResponse\modules;
 
 use rvkulikov\yii2\getResponse\modules\searchContacts\GRGetSearchContactsOptions;
+use rvkulikov\yii2\getResponse\modules\searchContacts\GRUpdateSearchContactOptions;
 
 /**
  * Class GRApiSearchContacts
@@ -28,6 +29,7 @@ class GRApiSearchContacts extends GRApiBase
 
         return $response->getData();
     }
+
     /**
      * @param string $id
      *
@@ -36,6 +38,24 @@ class GRApiSearchContacts extends GRApiBase
     public function getSearchContact($id)
     {
         $request  = $this->httpClient->get("search-contacts/{$id}");
+        $response = $request->send();
+
+        if (!$response->isOk) {
+            $this->handleError($response);
+        }
+
+        return $response->getData();
+    }
+
+    /**
+     * @param string                       $id
+     * @param GRUpdateSearchContactOptions $options
+     *
+     * @return mixed[]
+     */
+    public function updateSearchContact($id, GRUpdateSearchContactOptions $options)
+    {
+        $request  = $this->httpClient->post("search-contacts/{$id}", $options->toArray());
         $response = $request->send();
 
         if (!$response->isOk) {
