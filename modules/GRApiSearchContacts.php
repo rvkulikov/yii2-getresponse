@@ -64,4 +64,21 @@ class GRApiSearchContacts extends GRApiBase
 
         return $response->getData();
     }
+
+    /**
+     * @param string $id
+     *
+     * @return mixed[]
+     */
+    public function deleteSearchContact($id)
+    {
+        $request  = $this->httpClient->delete("search-contacts/{$id}");
+        $response = $request->send();
+
+        if (!$response->isOk) {
+            $this->handleError($response);
+        }
+
+        return $response->getData();
+    }
 }
