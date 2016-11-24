@@ -5,6 +5,7 @@ use rvkulikov\yii2\getResponse\modules\contacts\GRCreateContactOptions;
 use rvkulikov\yii2\getResponse\modules\contacts\GRGetContactsOptions;
 use rvkulikov\yii2\getResponse\modules\contacts\GRUpdateContactOptions;
 use yii\helpers\ArrayHelper;
+use yii\httpclient\Request;
 
 /**
  * Class Contacts
@@ -53,9 +54,48 @@ class GRApiContacts extends GRApiBase
         return $data;
     }
 
+    /**
+     * @param string $id
+     *
+     * @return mixed[][]
+     */
     public function getContactActivities($id)
     {
+        $request  = $this->httpClient->get("contacts/{$id}/activities");
+        $response = $request->send();
 
+        if (!$response->isOk) {
+            $this->handleError($response);
+        }
+
+        return $response->getData();
+    }
+
+    /**
+     * @param string[] $ids
+     *
+     * @return mixed[][]
+     */
+    public function getContactActivitiesBatch($ids)
+    {
+        /** @var Request[] $requests */
+        $requests = [];
+        foreach ($ids as $id) {
+            $requests[$id] = $this->httpClient->get("contacts/{$id}/activities");
+        }
+
+        $responses = $this->httpClient->batchSend($requests);
+        $dataArray = [];
+
+        foreach ($responses as $id => $response) {
+            if (!$response->isOk) {
+                $this->handleError($response);
+            }
+
+            $dataArray[$id] = $response->getData();
+        }
+
+        return $dataArray;
     }
 
     /**
