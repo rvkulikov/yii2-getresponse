@@ -9,6 +9,7 @@ use rvkulikov\yii2\getResponse\modules\GRApiSearchContacts;
 use rvkulikov\yii2\getResponse\modules\GRApiTags;
 use yii\base\Component;
 use yii\base\InvalidConfigException;
+use yii\helpers\ArrayHelper;
 use yii\httpclient\Client;
 
 /**
@@ -26,9 +27,9 @@ class GRClient extends Component
     public $fields  = [];
 
     /**
-     * @var Client
+     * @var Client|array|string
      */
-    private $httpClient;
+    public $httpClient = [];
 
     /**
      * @var GRApiContacts
@@ -70,14 +71,8 @@ class GRClient extends Component
         if (!$this->token) {
             throw new InvalidConfigException("'token' property must be set");
         }
-    }
 
-    /**
-     * @return mixed
-     */
-    public function getHttpClient()
-    {
-        if (!$this->httpClient) {
+        if(!$this->httpClient instanceof Client){
             $requestConfig = ['headers' => []];
 
             if ($this->token) {
@@ -88,12 +83,26 @@ class GRClient extends Component
                 $requestConfig['headers']['X-Domain'] = $this->domain;
             }
 
-            $this->httpClient = new Client([
+            if(is_string($this->httpClient)){
+                $this->httpClient = ['class' => $this->httpClient];
+            }
+
+            if(empty($this->httpClient['class'])){
+                $this->httpClient['class'] = 'yii\httpclient\Client';
+            }
+
+            $this->httpClient = \Yii::createObject(ArrayHelper::merge([
                 'baseUrl'       => $this->baseUrl,
                 'requestConfig' => $requestConfig
-            ]);
+            ], $this->httpClient));
         }
+    }
 
+    /**
+     * @return mixed
+     */
+    public function getHttpClient()
+    {
         return $this->httpClient;
     }
 
