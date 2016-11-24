@@ -48,6 +48,22 @@ class GRApiSearchContacts extends GRApiBase
     }
 
     /**
+     * @param string $id
+     *
+     * @return mixed[]
+     */
+    public function getSearchContactContacts($id){
+        $request  = $this->httpClient->get("search-contacts/{$id}/contacts");
+        $response = $request->send();
+
+        if (!$response->isOk) {
+            $this->handleError($response);
+        }
+
+        return $response->getData();
+    }
+
+    /**
      * @param string                       $id
      * @param GRUpdateSearchContactOptions $options
      *
