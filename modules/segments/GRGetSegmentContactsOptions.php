@@ -43,7 +43,7 @@ class GRGetSegmentContactsOptions extends Model implements GRPaginationInterface
      */
     public function getPerPage()
     {
-        return $this->perPage;
+        return $this->perPage ?: self::PER_PAGE_MAX;
     }
 
     /**

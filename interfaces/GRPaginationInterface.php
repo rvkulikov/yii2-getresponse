@@ -13,6 +13,11 @@ namespace rvkulikov\yii2\getResponse\interfaces;
 interface GRPaginationInterface
 {
     /**
+     * @const integer
+     */
+    const PER_PAGE_MAX = 500;
+
+    /**
      * @param integer $value
      */
     public function setPerPage($value);
