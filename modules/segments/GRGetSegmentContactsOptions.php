@@ -1,6 +1,7 @@
 <?php
 namespace rvkulikov\yii2\getResponse\modules\segments;
 
+use rvkulikov\yii2\getResponse\interfaces\GRPaginationInterface;
 use yii\base\Model;
 
 /**
@@ -10,26 +11,46 @@ use yii\base\Model;
  *
  * @author  Roman Kulikov <r.v.kulikov@yandex.ru>
  */
-class GRGetSegmentContactsOptions extends Model
+class GRGetSegmentContactsOptions extends Model implements GRPaginationInterface
 {
     /**
      * @var string[] // todo ensure
      */
     public $query;
+
     /**
      * @var string|string[] // todo ensure
      */
     public $fields;
+
     /**
      * @var string[] // todo ensure
      */
     public $sort;
+
     /**
      * @var integer
      */
     public $page;
+
     /**
      * @var integer
      */
     public $perPage;
+
+    /**
+     * @inheritdoc
+     */
+    public function getPerPage()
+    {
+        return $this->perPage;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setPerPage($perPage)
+    {
+        $this->perPage = $perPage;
+    }
 }

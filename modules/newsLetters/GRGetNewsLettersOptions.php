@@ -1,6 +1,7 @@
 <?php
 namespace rvkulikov\yii2\getResponse\modules\newsLetters;
 
+use rvkulikov\yii2\getResponse\interfaces\GRPaginationInterface;
 use yii\base\Model;
 
 /**
@@ -10,26 +11,46 @@ use yii\base\Model;
  *
  * @author  Roman Kulikov <r.v.kulikov@yandex.ru>
  */
-class GRGetNewsLettersOptions extends Model
+class GRGetNewsLettersOptions extends Model implements GRPaginationInterface
 {
     /**
      * @var string[]
      */
     public $query;
+
     /**
      * @var string|string[]
      */
     public $fields;
+
     /**
      * @var string[]
      */
     public $sort;
+
     /**
      * @var integer
      */
     public $page;
+
     /**
      * @var integer
      */
     public $perPage;
+
+    /**
+     * @inheritdoc
+     */
+    public function getPerPage()
+    {
+        return $this->perPage;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setPerPage($perPage)
+    {
+        $this->perPage = $perPage;
+    }
 }

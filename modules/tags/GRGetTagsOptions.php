@@ -1,6 +1,7 @@
 <?php
 namespace rvkulikov\yii2\getResponse\modules\tags;
 
+use rvkulikov\yii2\getResponse\interfaces\GRPaginationInterface;
 use yii\base\Model;
 
 /**
@@ -10,22 +11,41 @@ use yii\base\Model;
  *
  * @author  Roman Kulikov <r.v.kulikov@yandex.ru>
  */
-class GRGetTagsOptions extends Model
+class GRGetTagsOptions extends Model implements GRPaginationInterface
 {
     /**
      * @var string|string[]
      */
     public $fields;
+
     /**
      * @var string[]
      */
     public $sort;
+
     /**
      * @var integer
      */
     public $page;
+
     /**
      * @var integer
      */
     public $perPage;
+
+    /**
+     * @inheritdoc
+     */
+    public function getPerPage()
+    {
+        return $this->perPage;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setPerPage($perPage)
+    {
+        $this->perPage = $perPage;
+    }
 }
