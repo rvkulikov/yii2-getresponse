@@ -5,7 +5,7 @@ use rvkulikov\yii2\getResponse\modules\GRApiCampaigns;
 use rvkulikov\yii2\getResponse\modules\GRApiContacts;
 use rvkulikov\yii2\getResponse\modules\GRApiCustomFields;
 use rvkulikov\yii2\getResponse\modules\GRApiNewsLetters;
-use rvkulikov\yii2\getResponse\modules\GRApiSearchContacts;
+use rvkulikov\yii2\getResponse\modules\GRApiSegments;
 use rvkulikov\yii2\getResponse\modules\GRApiTags;
 use yii\base\Component;
 use yii\base\InvalidConfigException;
@@ -57,9 +57,9 @@ class GRClient extends Component
     private $newsLetters;
 
     /**
-     * @var GRApiSearchContacts
+     * @var GRApiSegments
      */
-    private $searchContacts;
+    private $segments;
 
     /**
      * @inheritdoc
@@ -177,16 +177,16 @@ class GRClient extends Component
     }
 
     /**
-     * @return GRApiSearchContacts
+     * @return GRApiSegments
      */
-    public function getSearchContacts()
+    public function getSegments()
     {
-        if (!$this->searchContacts) {
-            $this->searchContacts = new GRApiSearchContacts([
+        if (!$this->segments) {
+            $this->segments = new GRApiSegments([
                 'httpClient' => $this->getHttpClient()
             ]);
         }
 
-        return $this->searchContacts;
+        return $this->segments;
     }
 }

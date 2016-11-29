@@ -1,24 +1,25 @@
 <?php
 namespace rvkulikov\yii2\getResponse\modules;
 
-use rvkulikov\yii2\getResponse\modules\searchContacts\GRGetSearchContactsOptions;
-use rvkulikov\yii2\getResponse\modules\searchContacts\GRUpdateSearchContactOptions;
+use rvkulikov\yii2\getResponse\modules\segments\GRGetSegmentContactsOptions;
+use rvkulikov\yii2\getResponse\modules\segments\GRGetSegmentsOptions;
+use rvkulikov\yii2\getResponse\modules\segments\GRUpdateSegmentOptions;
 
 /**
- * Class GRApiSearchContacts
+ * Class GRApiSegments
  *
  * @package rvkulikov\yii2\getResponse\modules
  *
  * @author  Roman Kulikov <r.v.kulikov@yandex.ru>
  */
-class GRApiSearchContacts extends GRApiBase
+class GRApiSegments extends GRApiBase
 {
     /**
-     * @param GRGetSearchContactsOptions $options
+     * @param GRGetSegmentsOptions $options
      *
      * @return mixed[]
      */
-    public function getSearchContacts(GRGetSearchContactsOptions $options = null)
+    public function getSegments(GRGetSegmentsOptions $options = null)
     {
         $request  = $this->httpClient->get('search-contacts', $options ? $options->toArray() : null);
         $response = $request->send();
@@ -35,7 +36,7 @@ class GRApiSearchContacts extends GRApiBase
      *
      * @return mixed[]
      */
-    public function getSearchContact($id)
+    public function getSegment($id)
     {
         $request  = $this->httpClient->get("search-contacts/{$id}");
         $response = $request->send();
@@ -48,12 +49,14 @@ class GRApiSearchContacts extends GRApiBase
     }
 
     /**
-     * @param string $id
+     * @param string                      $id
+     * @param GRGetSegmentContactsOptions $options
      *
-     * @return mixed[]
+     * @return \mixed[]
      */
-    public function getSearchContactContacts($id){
-        $request  = $this->httpClient->get("search-contacts/{$id}/contacts");
+    public function getSegmentContacts($id, GRGetSegmentContactsOptions $options = null)
+    {
+        $request  = $this->httpClient->get("search-contacts/{$id}/contacts", $options ? $options->toArray() : null);
         $response = $request->send();
 
         if (!$response->isOk) {
@@ -64,12 +67,12 @@ class GRApiSearchContacts extends GRApiBase
     }
 
     /**
-     * @param string                       $id
-     * @param GRUpdateSearchContactOptions $options
+     * @param string                 $id
+     * @param GRUpdateSegmentOptions $options
      *
      * @return mixed[]
      */
-    public function updateSearchContact($id, GRUpdateSearchContactOptions $options)
+    public function updateSegment($id, GRUpdateSegmentOptions $options)
     {
         $request  = $this->httpClient->post("search-contacts/{$id}", $options->toArray());
         $response = $request->send();
@@ -86,7 +89,7 @@ class GRApiSearchContacts extends GRApiBase
      *
      * @return mixed[]
      */
-    public function deleteSearchContact($id)
+    public function deleteSegment($id)
     {
         $request  = $this->httpClient->delete("search-contacts/{$id}");
         $response = $request->send();

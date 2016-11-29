@@ -1,5 +1,5 @@
 <?php
-namespace rvkulikov\yii2\getResponse\modules\searchContacts;
+namespace rvkulikov\yii2\getResponse\modules\segments;
 
 use yii\base\Model;
 
@@ -10,7 +10,7 @@ use yii\base\Model;
  *
  * @author  Roman Kulikov <r.v.kulikov@yandex.ru>
  */
-class GRUpdateSearchContactOptions extends Model
+class GRUpdateSegmentOptions extends Model
 {
     public $name;
     public $subscribersType;

@@ -1,27 +1,27 @@
 <?php
-namespace rvkulikov\yii2\getResponse\modules\searchContacts;
+namespace rvkulikov\yii2\getResponse\modules\segments;
 
 use yii\base\Model;
 
 /**
- * Class GRGetSearchContactsOptions
+ * Class GRGetSearchContactContactsOptions
  *
  * @package rvkulikov\yii2\getResponse\modules\searchContacts
  *
  * @author  Roman Kulikov <r.v.kulikov@yandex.ru>
  */
-class GRGetSearchContactsOptions extends Model
+class GRGetSegmentContactsOptions extends Model
 {
     /**
-     * @var string[]
+     * @var string[] // todo ensure
      */
     public $query;
     /**
-     * @var string|string[]
+     * @var string|string[] // todo ensure
      */
     public $fields;
     /**
-     * @var string[]
+     * @var string[] // todo ensure
      */
     public $sort;
     /**
