@@ -36,7 +36,7 @@ class GRGetContactsOptions extends Model implements GRPaginationInterface
     /**
      * @var integer
      */
-    private $perPage;
+    public $perPage;
 
     /**
      * @var string
