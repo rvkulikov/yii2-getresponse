@@ -36,7 +36,7 @@ class GRGetCampaignsOptions extends Model implements GRPaginationInterface
     /**
      * @var integer
      */
-    public $perPage;
+    private $perPage;
 
     /**
      * @var string

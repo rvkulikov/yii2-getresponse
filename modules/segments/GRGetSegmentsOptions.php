@@ -36,7 +36,7 @@ class GRGetSegmentsOptions extends Model implements GRPaginationInterface
     /**
      * @var integer
      */
-    public $perPage;
+    private $perPage;
 
     /**
      * @inheritdoc

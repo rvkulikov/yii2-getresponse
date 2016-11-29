@@ -31,7 +31,7 @@ class GRGetCustomFieldsOptions extends Model implements GRPaginationInterface
     /**
      * @var integer
      */
-    public $perPage;
+    private $perPage;
 
     /**
      * @inheritdoc
