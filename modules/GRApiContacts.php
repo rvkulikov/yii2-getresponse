@@ -2,6 +2,7 @@
 namespace rvkulikov\yii2\getResponse\modules;
 
 use rvkulikov\yii2\getResponse\modules\contacts\GRCreateContactOptions;
+use rvkulikov\yii2\getResponse\modules\contacts\GRGetContactActivitiesOptions;
 use rvkulikov\yii2\getResponse\modules\contacts\GRGetContactsOptions;
 use rvkulikov\yii2\getResponse\modules\contacts\GRUpdateContactOptions;
 use yii\helpers\ArrayHelper;
@@ -55,13 +56,14 @@ class GRApiContacts extends GRApiBase
     }
 
     /**
-     * @param string $id
+     * @param string                        $id
+     * @param GRGetContactActivitiesOptions $options
      *
-     * @return mixed[][]
+     * @return \mixed[][]
      */
-    public function getContactActivities($id)
+    public function getContactActivities($id, GRGetContactActivitiesOptions $options = null)
     {
-        $request  = $this->httpClient->get("contacts/{$id}/activities");
+        $request  = $this->httpClient->get("contacts/{$id}/activities", $options ? $options->toArray() : null);
         $response = $request->send();
 
         if (!$response->isOk) {
