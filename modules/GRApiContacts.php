@@ -74,16 +74,17 @@ class GRApiContacts extends GRApiBase
     }
 
     /**
-     * @param string[] $ids
+     * @param string[]                      $ids
+     * @param GRGetContactActivitiesOptions $options
      *
-     * @return mixed[][]
+     * @return \mixed[][]
      */
-    public function getContactActivitiesBatch($ids)
+    public function getContactActivitiesBatch($ids, GRGetContactActivitiesOptions $options = null)
     {
         /** @var Request[] $requests */
         $requests = [];
         foreach ($ids as $id) {
-            $requests[$id] = $this->httpClient->get("contacts/{$id}/activities");
+            $requests[$id] = $this->httpClient->get("contacts/{$id}/activities", $options ? $options->toArray() : null);
         }
 
         $responses = $this->httpClient->batchSend($requests);
