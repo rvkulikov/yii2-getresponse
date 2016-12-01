@@ -91,11 +91,9 @@ class GRApiContacts extends GRApiBase
         $dataArray = [];
 
         foreach ($responses as $id => $response) {
-            if (!$response->isOk) {
-                $this->handleError($response);
+            if ($response->isOk) {
+                $dataArray[$id] = $response->getData();
             }
-
-            $dataArray[$id] = $response->getData();
         }
 
         return $dataArray;
