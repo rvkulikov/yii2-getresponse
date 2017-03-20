@@ -144,7 +144,7 @@ class GRApiContacts extends GRApiBase
     public function deleteContact($id, GRDeleteContactOptions $options = null)
     {
         $query    = http_build_query(array_filter($options ? $options->toArray() : []));
-        $url      = "contacts/{$id}" . $query ? "?{$query}" : "";
+        $url      = "contacts/{$id}" . ($query ? "?{$query}" : "");
 
         $request  = $this->httpClient->delete($url);
         $response = $request->send();
