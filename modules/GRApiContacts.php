@@ -2,6 +2,7 @@
 namespace rvkulikov\yii2\getResponse\modules;
 
 use rvkulikov\yii2\getResponse\modules\contacts\GRCreateContactOptions;
+use rvkulikov\yii2\getResponse\modules\contacts\GRDeleteContactOptions;
 use rvkulikov\yii2\getResponse\modules\contacts\GRGetContactActivitiesOptions;
 use rvkulikov\yii2\getResponse\modules\contacts\GRGetContactsOptions;
 use rvkulikov\yii2\getResponse\modules\contacts\GRUpdateContactOptions;
@@ -134,8 +135,24 @@ class GRApiContacts extends GRApiBase
         return $response->getData();
     }
 
-    public function deleteContact($id)
+    /**
+     * @param string                      $id
+     * @param GRDeleteContactOptions|null $options
+     *
+     * @return mixed
+     */
+    public function deleteContact($id, GRDeleteContactOptions $options = null)
     {
+        $query    = http_build_query(array_filter($options ? $options->toArray() : []));
+        $url      = "contacts/{$id}" . $query ? "?{$query}" : "";
 
+        $request  = $this->httpClient->delete($url);
+        $response = $request->send();
+
+        if (!$response->isOk) {
+            $this->handleError($response);
+        }
+
+        return $response->getData();
     }
 }
