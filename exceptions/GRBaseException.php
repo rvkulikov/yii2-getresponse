@@ -3,6 +3,7 @@ namespace rvkulikov\yii2\getResponse\exceptions;
 
 use yii\base\Exception;
 use yii\helpers\ArrayHelper;
+use yii\helpers\VarDumper;
 use yii\httpclient\Response;
 
 /**
@@ -60,6 +61,7 @@ class GRBaseException extends Exception
         $data  = $response->getData();
         $class = ArrayHelper::getValue(self::$exceptionsMap, $data['code'], __CLASS__);
 
+        /** @var GRBaseException $exception */
         $exception = \Yii::createObject([
             'class'           => $class,
             'httpCode'        => $response->statusCode,
@@ -68,6 +70,8 @@ class GRBaseException extends Exception
             'context'         => $data['context'],
             'uuid'            => $data['uuid'],
         ], [$data['message'], $data['code'], null]);
+
+        $exception->message = implode(';', [$exception->message, VarDumper::dumpAsString($exception->context)]);
 
         /** @noinspection PhpIncompatibleReturnTypeInspection */
         return $exception;
