@@ -28,4 +28,22 @@ class GRApiCampaigns extends GRApiBase
 
         return $response->getData();
     }
+
+    /**
+     * @param string $id
+     *
+     * @return mixed
+     */
+    public function getCampaign($id)
+    {
+        $request  = $this->httpClient->get("campaigns/{$id}");
+        $response = $request->send();
+
+        if (!$response->isOk) {
+            $this->handleError($response);
+        }
+
+        return $response->getData();
+    }
+
 }
