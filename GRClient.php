@@ -1,6 +1,7 @@
 <?php
 namespace rvkulikov\yii2\getResponse;
 
+use rvkulikov\yii2\getResponse\modules\GRApiAutoResponders;
 use rvkulikov\yii2\getResponse\modules\GRApiCampaigns;
 use rvkulikov\yii2\getResponse\modules\GRApiContacts;
 use rvkulikov\yii2\getResponse\modules\GRApiCustomFields;
@@ -55,6 +56,11 @@ class GRClient extends Component
      * @var GRApiNewsLetters
      */
     private $newsLetters;
+
+    /**
+     * @var GRApiAutoResponders
+     */
+    private $autoResponders;
 
     /**
      * @var GRApiSegments
@@ -174,6 +180,20 @@ class GRClient extends Component
         }
 
         return $this->newsLetters;
+    }
+
+    /**
+     * @return GRApiAutoResponders
+     */
+    public function getAutoResponders()
+    {
+        if (!$this->autoResponders) {
+            $this->autoResponders = new GRApiAutoResponders([
+                'httpClient' => $this->getHttpClient()
+            ]);
+        }
+
+        return $this->autoResponders;
     }
 
     /**
