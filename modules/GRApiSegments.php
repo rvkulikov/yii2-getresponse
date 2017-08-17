@@ -1,6 +1,7 @@
 <?php
 namespace rvkulikov\yii2\getResponse\modules;
 
+use rvkulikov\yii2\getResponse\modules\segments\GRCreateSegmentOptions;
 use rvkulikov\yii2\getResponse\modules\segments\GRGetSegmentContactsOptions;
 use rvkulikov\yii2\getResponse\modules\segments\GRGetSegmentsOptions;
 use rvkulikov\yii2\getResponse\modules\segments\GRUpdateSegmentOptions;
@@ -65,6 +66,24 @@ class GRApiSegments extends GRApiBase
 
         return $response->getData();
     }
+
+    /**
+     * @param GRCreateSegmentOptions $options
+     *
+     * @return mixed[]
+     */
+    public function createSegment(GRCreateSegmentOptions $options)
+    {
+        $request  = $this->httpClient->post("search-contacts", $options->toArray());
+        $response = $request->send();
+
+        if (!$response->isOk) {
+            $this->handleError($response);
+        }
+
+        return $response->getData();
+    }
+
 
     /**
      * @param string                 $id
