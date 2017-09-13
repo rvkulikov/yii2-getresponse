@@ -44,3 +44,13 @@ return [
     ]
 ];
 ```
+
+## Использование
+
+```php
+<?php
+$grClient = \Yii::$app->gr;
+$campaign = $grClient->getCampaigns()->getCampaign('<id>');
+\yii\helpers\VarDumper::dump($campaign);
+?>
+```
