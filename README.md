@@ -5,7 +5,6 @@
 ```php
 <?php
 return [
-    'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'components' => [
         'gr'        => [
             'class'   => 'rvkulikov\yii2\getResponse\GRClient',
@@ -28,7 +27,6 @@ return [
 ```php
 <?php
 return [
-    'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'components' => [
         'gr'        => [
             'baseUrl' => 'https://api3.getresponse360.pl/v3',
