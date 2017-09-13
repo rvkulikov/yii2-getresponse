@@ -1,0 +1,46 @@
+## Инициализация компонента
+
+### main.php
+
+```php
+<?php
+return [
+    'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
+    'components' => [
+        'gr'        => [
+            'class'   => 'rvkulikov\yii2\getResponse\GRClient',
+            'baseUrl' => null,
+            'token'   => null,
+            'domain'  => null,
+            'fields'  => [
+                'customFields' => [
+                    'foo' => null,
+                    'bar' => null,
+                ],
+            ],
+        ],
+    ]
+];
+```
+
+### main-local.php
+
+```php
+<?php
+return [
+    'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
+    'components' => [
+        'gr'        => [
+            'baseUrl' => 'https://api3.getresponse360.pl/v3',
+            'token'   => 'token',
+            'domain'  => 'domain.com',
+            'fields'  => [
+                'customFields' => [
+                    'foo' => 'value1',
+                    'bar' => 'value2',
+                ],
+            ],
+        ],
+    ]
+];
+```
