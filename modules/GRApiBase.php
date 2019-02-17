@@ -25,7 +25,7 @@ class GRApiBase extends Component
      *
      * @throws GRBaseException
      */
-    protected function handleError(Response $response)
+    public function handleError(Response $response)
     {
         $exception = GRBaseException::buildExceptionViaResponse($response);
         throw $exception;
