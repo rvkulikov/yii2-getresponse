@@ -18,4 +18,5 @@ class GRCreateContactOptions extends Model
     public $campaign;
     public $customFieldValues;
     public $ipAddress;
+    public $tags;
 }
